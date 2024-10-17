@@ -18,36 +18,38 @@ while True:
     if event == "input" + "ENTER":
         
         check_letters = any(c.isalpha() for c in values['input'])
-        if check_letters ==True :
-            print("Digite Apenas Números")
-        else:
-            if values['input'] == '':
-                print('Digite Algum Valor')
+        try:
+            if check_letters ==True :
+                print("Digite Apenas Números")
             else:
-                if "," in values['input']:
-                    b = values['input'].replace(",",".")
-                    y = float(b)
+                if values['input'] == '':
+                    print('Digite Algum Valor')
                 else:
-                    y = float(values['input'])
+                    if "," in values['input']:
+                        b = values['input'].replace(",",".")
+                        y = float(b)
+                    else:
+                        y = float(values['input'])
 
-                soma5 = y + (y* 5/100 )
+                    soma5 = y + (y* 5/100 )
 
-                if values['checkbox30'] == True:
-                    somavista = soma5 + (soma5* 30/100)
-                else:
-                    somavista = soma5 + (soma5* 35/100)
-                    
-                print(values['input'],'=')
-                print("Á vista:",somavista)
-            
-                x = sympy.Symbol("x")
-                equacao = sympy.Eq(x - 0.1 * x, somavista)
-                resultado = sympy.solve([equacao], (x), set = True)
-                stringconv = str(resultado[1])
-                stringcut = stringconv[2:18]
-                floatmak = float(stringcut)
-                print("Cartão:",floatmak,"\n")
-
+                    if values['checkbox30'] == True:
+                        somavista = soma5 + (soma5* 30/100)
+                    else:
+                        somavista = soma5 + (soma5* 35/100)
+                        
+                    print(values['input'],'=')
+                    print("Á vista:",somavista)
+                
+                    x = sympy.Symbol("x")
+                    equacao = sympy.Eq(x - 0.1 * x, somavista)
+                    resultado = sympy.solve([equacao], (x), set = True)
+                    stringconv = str(resultado[1])
+                    stringcut = stringconv[2:18]
+                    floatmak = float(stringcut)
+                    print("Cartão:",floatmak,"\n")
+        except  ValueError:
+            print('Digite Apenas Números')
 
     if event == psg.WINDOW_CLOSED:
         break
